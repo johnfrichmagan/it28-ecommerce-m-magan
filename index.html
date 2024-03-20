@@ -39,6 +39,7 @@
                 <th>Available Quantity</th>
                 <th>Product Picture</th>
                 <th>Availability</th>
+                <th>Action</th> <!-- Added column for action buttons -->
             </tr>
         </thead>
         <tbody id="inventory">
@@ -47,14 +48,12 @@
     </table>
 
     <script>
-     
         var products = [
             { name: "Laptop", price:20.999, quantity: 10, picture: "https://imgs.search.brave.com/dS6CnCuHuN5hBBvHKVUDxJ2VBGKPe41HbhUexg_xNeY/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9jZG4u/dGhld2lyZWN1dHRl/ci5jb20vd3AtY29u/dGVudC9tZWRpYS8y/MDIzLzA2L2xhcHRv/cHN1bmRlcjUwMC0y/MDQ4cHgtYWNlcmFz/cGlyZTNzcGluMTQu/anBn" },
             { name: "Mouse", price: 249, quantity: 20, picture: "https://imgs.search.brave.com/32oDUUVbL9Ki-QIyl-V9tMvY1DqrlHxq4wqYQ-iXD5s/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMtbmEuc3NsLWlt/YWdlcy1hbWF6b24u/Y29tL2ltYWdlcy9J/LzYxMHF6SFJURk9M/LmpwZw" },
             { name: "Keyboard", price: 500, quantity: 30, picture: "https://imgs.search.brave.com/2mkr3O6dlu4JV4A0C6zTK3xUvOSs5KvzV8sAwlcB0yA/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTU0/NzY5MzQ4L3Bob3Rv/L2NvbXB1dGVyLWtl/eWJvYXJkLmpwZz9z/PTYxMng2MTImdz0w/Jms9MjAmYz1ER2pn/b29JYm9EQUtpUG15/WGdTbEkxNk53VkFD/OHdRMUo3aTh6MU4w/azBvPQ" }
         ];
 
-        
         function displayProducts() {
             var inventoryTbody = document.getElementById("inventory");
             inventoryTbody.innerHTML = ""; 
@@ -62,12 +61,10 @@
             products.forEach(function(product) {
                 var row = document.createElement("tr");
 
-                
                 var nameCell = document.createElement("td");
                 nameCell.textContent = product.name;
                 row.appendChild(nameCell);
 
-                
                 var priceCell = document.createElement("td");
                 priceCell.textContent = "₱" + product.price;
                 row.appendChild(priceCell);
@@ -76,23 +73,28 @@
                 quantityCell.textContent = product.quantity;
                 row.appendChild(quantityCell);
 
-               
                 var pictureCell = document.createElement("td");
                 var img = document.createElement("img");
                 img.src = product.picture;
                 pictureCell.appendChild(img);
                 row.appendChild(pictureCell);
 
-               
                 var availabilityCell = document.createElement("td");
                 availabilityCell.textContent = product.quantity > 0 ? "Available" : "Out of Stock";
                 row.appendChild(availabilityCell);
+
+                var actionCell = document.createElement("td");
+                var buyButton = document.createElement("a");
+                buyButton.href = "payment.html";
+                buyButton.className = "btn btn-primary";
+                buyButton.textContent = "Buy";
+                actionCell.appendChild(buyButton);
+                row.appendChild(actionCell);
 
                 inventoryTbody.appendChild(row);
             });
         }
 
-       
         window.onload = function() {
             displayProducts();
         };
